@@ -28,8 +28,18 @@ public class MainController {
 
 
     @FXML
-    private void registrarBicicleta() {
-        mostrar("Pantalla Registrar Bicicleta (pendiente)");
+    private void registrarBicicleta(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(TallerBicicletasApp.class.getResource("ui/BicicletaView.fxml"));
+            Scene scene = new Scene(loader.load(), 720, 450);
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.setTitle("Registrar Cliente");
+
+        } catch (Exception e) {
+            mostrar("Error abriendo ClienteView: " + e.getMessage());
+        }
     }
 
     @FXML
