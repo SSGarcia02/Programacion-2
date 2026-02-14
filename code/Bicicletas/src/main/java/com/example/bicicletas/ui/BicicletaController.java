@@ -20,11 +20,6 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 public class BicicletaController {
-    @FXML private ResourceBundle resources;
-
-    @FXML private URL location;
-
-    private final ObservableList<Bicicleta> bicicletasObs = FXCollections.observableArrayList();
 
     @FXML private TableView<Bicicleta> tableBicicleta;
     @FXML private TableColumn<Bicicleta, String> tcClienteAsignado;
@@ -35,22 +30,31 @@ public class BicicletaController {
     @FXML private TableColumn<Bicicleta, String> tcTipo;
 
     @FXML private ComboBox<String> ComboBoxTipo;
-    @FXML private ComboBox<String> ComboBoxClienteAsignado;
+    @FXML private ComboBox<Cliente> ComboBoxClienteAsignado;
     @FXML private TextField txtColor;
     @FXML private TextField txtMarca;
     @FXML private TextField txtModelo;
     @FXML private TextField txtNumMarco;
 
+    private final ObservableList<Bicicleta> bicicletasObs = FXCollections.observableArrayList();
+
+
     @FXML
     public void initialize() {
+        tcMarca.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMarca()));
+        tcTipo.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getTipo())));
+        tcColor.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getColor()));
+        tcNumMarco.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSerial()));
+        tcModelo.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getAnio())));
+        tcClienteAsignado.setCellValueFactory(cellData -> {
+            Cliente cliente = cellData.getValue().getCliente();
+            String nombreCliente = (cliente != null) ? cliente.getNombre() : "Sin asignar";
+            return new SimpleStringProperty(nombreCliente);
+        });
 
-        tcMarca.setCellValueFactory(cell -> new javafx.beans.property.SimpleStringProperty(cell.getValue().getMarca()));
-        tcTipo.setCellValueFactory(cell -> new javafx.beans.property.SimpleStringProperty(String.valueOf(cell.getValue().getTipo())));
-        tcColor.setCellValueFactory(cell -> new javafx.beans.property.SimpleStringProperty(cell.getValue().getColor()));
-        tcNumMarco.setCellValueFactory(cell -> new javafx.beans.property.SimpleStringProperty(cell.getValue().getSerial()));
-        tcModelo.setCellValueFactory(cell -> new javafx.beans.property.SimpleStringProperty(String.valueOf(cell.getValue().getAnio())));
-        tcClienteAsignado.setCellValueFactory(cell -> new javafx.beans.property.SimpleStringProperty(String.valueOf(cell.getValue().getCliente())));
-
+        llenarComboBoxTipo();
+        llenarComboBoxClientes();
+        
         bicicletasObs.setAll(DataStore.bicicletas);
         tableBicicleta.setItems(bicicletasObs);
     }
@@ -62,7 +66,7 @@ public class BicicletaController {
         String color = txtColor.getText().trim();
         String numMarco = txtNumMarco.getText().trim();
         String modelo = txtModelo.getText().trim();
-        String clienteAsignado = ComboBoxClienteAsignado.getValue();
+        Cliente clienteAsignado = ComboBoxClienteAsignado.getValue();
 
         if (marca.isEmpty() || tipo == null || color.isEmpty() || numMarco.isEmpty()
                 || modelo.isEmpty() || clienteAsignado == null){
@@ -75,7 +79,14 @@ public class BicicletaController {
             alerta(Alert.AlertType.ERROR, "Duplicado", "Ya existe una bicicleta con este numero de marco.");
             return;
         }
-        Bicicleta nuevaBici = new Bicicleta(numMarco, marca, tipo, color, modelo, clienteAsignado);
+        Bicicleta nuevaBici = new Bicicleta();
+        nuevaBici.setMarca(marca);
+        nuevaBici.setTipo(TipoBicicleta.valueOf(tipo));
+        nuevaBici.setColor(color);
+        nuevaBici.setSerial(numMarco);
+        nuevaBici.setAnio(Integer.parseInt(modelo));
+        nuevaBici.setCliente(clienteAsignado);
+
         DataStore.bicicletas.add(nuevaBici);
 
         bicicletasObs.setAll(DataStore.bicicletas);
@@ -104,7 +115,37 @@ public class BicicletaController {
         txtModelo.clear();
         ComboBoxClienteAsignado.setValue(null);
     }
+    private void llenarComboBoxTipo() {
+        // Obtener todos los valores del Enum y convertirlos a String
+        ObservableList<String> tipos = FXCollections.observableArrayList();
 
+        for (TipoBicicleta tipo : TipoBicicleta.values()) {
+            tipos.add(tipo.toString());
+        }
+        ComboBoxTipo.setItems(tipos);
+    }
+
+    private void llenarComboBoxClientes() {
+        if (DataStore.clientes != null) {
+            // Crear ObservableList de tipo Cliente (no String)
+            ObservableList<Cliente> listaClientes = FXCollections.observableArrayList(DataStore.clientes);
+            ComboBoxClienteAsignado.setItems(listaClientes);
+
+            // Configurar cómo se muestran los clientes
+            ComboBoxClienteAsignado.setCellFactory(param -> new ListCell<Cliente>() {
+                @Override
+                protected void updateItem(Cliente cliente, boolean empty) {
+                    super.updateItem(cliente, empty);
+                    if (empty || cliente == null) {
+                        setText(null);
+                    } else {
+                        setText(cliente.getNombre()); // o cliente.getNombreCompleto()
+                    }
+                }
+            });
+
+        }
+    }
     @FXML
     private void volverAlMenu() {
         try {

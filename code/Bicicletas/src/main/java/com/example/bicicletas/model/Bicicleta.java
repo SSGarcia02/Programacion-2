@@ -8,6 +8,7 @@ public class Bicicleta {
     private int anio;
     private Cliente cliente;
 
+    public Bicicleta(){    }
     public Bicicleta(String serial, String marca, TipoBicicleta tipo, String color, int anio, Cliente cliente) {
         this.serial = serial;
         this.marca = marca;
