@@ -3,12 +3,12 @@ package com.example.bicicletas.model;
 public class Bicicleta {
     private String serial;
     private String marca;
-    private String tipo;
+    private TipoBicicleta tipo;
     private String color;
     private int anio;
     private Cliente cliente;
 
-    public Bicicleta(String serial, String marca, String tipo, String color, int anio, Cliente cliente) {
+    public Bicicleta(String serial, String marca, TipoBicicleta tipo, String color, int anio, Cliente cliente) {
         this.serial = serial;
         this.marca = marca;
         this.tipo = tipo;
