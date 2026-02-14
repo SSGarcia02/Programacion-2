@@ -17,6 +17,49 @@ public class Bicicleta {
         this.cliente = cliente;
     }
 
+    public Bicicleta(String numMarco, String marca, String tipo, String color, String modelo, String clienteAsignado) {
+    }
+
+    public void setSerial(String serial) {
+        this.serial = serial;
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public TipoBicicleta getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(TipoBicicleta tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public int getAnio() {
+        return anio;
+    }
+
+    public void setAnio(int anio) {
+        this.anio = anio;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
     public String getSerial() { return serial; }
     public Cliente getCliente() { return cliente; }
 }

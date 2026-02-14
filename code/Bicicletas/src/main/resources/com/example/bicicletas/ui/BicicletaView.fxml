@@ -18,7 +18,10 @@
 <?import javafx.scene.text.Font?>
 
 
-<BorderPane prefHeight="450.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="450.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.bicicletas.ui.BicicletaController"
+>
+
    <top>
       <HBox prefHeight="62.0" prefWidth="720.0" BorderPane.alignment="CENTER">
          <children>
@@ -65,8 +68,8 @@
                   <TextField fx:id="txtColor" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <TextField fx:id="txtNumMarco" GridPane.columnIndex="3" />
                   <TextField fx:id="txtModelo" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                  <TextField fx:id="txtClienteAsignado" GridPane.columnIndex="3" GridPane.rowIndex="2" />
                   <ComboBox fx:id="ComboBoxTipo" prefHeight="26.0" prefWidth="208.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <ComboBox fx:id="ComboBoxClienteAsignado" prefHeight="26.0" prefWidth="250.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
                </children>
                <VBox.margin>
                   <Insets left="10.0" right="10.0" />
@@ -87,7 +90,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button mnemonicParsing="false" onAction="#AgregarBicicleta" prefHeight="26.0" prefWidth="100.0" text="Agregar">
+                  <Button mnemonicParsing="false" onAction="#agregarBicicleta" prefHeight="26.0" prefWidth="100.0" text="Agregar">
                      <GridPane.margin>
                         <Insets left="10.0" />
                      </GridPane.margin>
