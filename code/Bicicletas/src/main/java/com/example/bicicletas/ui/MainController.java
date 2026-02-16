@@ -57,6 +57,10 @@ public class MainController {
         cambiarEscena(event, "/com/example/bicicletas/ui/HistorialView.fxml", "Historial por Bicicleta");
     }
 
+        } catch (Exception e) {
+            mostrar("Error abriendo MecanicoView: " + e.getMessage());
+        }
+    }
     @FXML
     private void ordenesPorFecha(ActionEvent event) {
         cambiarEscena(event, "/com/example/bicicletas/ui/OrdenesPorFechaView.fxml", "Órdenes por Fecha");

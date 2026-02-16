@@ -80,7 +80,7 @@ public class MecanicoController {
     @FXML
     private void volverAlMenu() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/bicicletas/ui/MainView.fxml"));
+            FXMLLoader loader = new FXMLLoader(TallerBicicletasApp.class.getResource("ui/MainView.fxml"));
             Scene scene = new Scene(loader.load(), 600, 400);
 
             Stage stage = (Stage) txtNombre.getScene().getWindow();

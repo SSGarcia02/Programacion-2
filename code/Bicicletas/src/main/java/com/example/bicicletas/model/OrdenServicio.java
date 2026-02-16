@@ -28,7 +28,6 @@ public class OrdenServicio {
 
     public LocalDate getFecha() { return fecha; }
     public LocalTime getHora() { return hora; }
-    public Bicicleta getBicicleta() { return bicicleta; }
     public Mecanico getMecanico() { return mecanico; }
     public String getMotivo() { return motivo; }
     public String getDiagnostico() { return diagnostico; }
