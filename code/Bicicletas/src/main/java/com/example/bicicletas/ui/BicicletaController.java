@@ -1,10 +1,6 @@
 package com.example.bicicletas.ui;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
-import com.example.bicicletas.TallerBicicletasApp;
 import com.example.bicicletas.model.Bicicleta;
 import com.example.bicicletas.model.Cliente;
 import com.example.bicicletas.model.TipoBicicleta;
@@ -12,7 +8,6 @@ import com.example.bicicletas.repository.DataStore;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -29,7 +24,7 @@ public class BicicletaController {
     @FXML private TableColumn<Bicicleta, String> tcNumMarco;
     @FXML private TableColumn<Bicicleta, String> tcTipo;
 
-    @FXML private ComboBox<String> ComboBoxTipo;
+    @FXML private ComboBox<TipoBicicleta> ComboBoxTipo;
     @FXML private ComboBox<Cliente> ComboBoxClienteAsignado;
     @FXML private TextField txtColor;
     @FXML private TextField txtMarca;
@@ -62,7 +57,7 @@ public class BicicletaController {
     @FXML
     private void agregarBicicleta() {
         String marca = txtMarca.getText().trim();
-        String tipo = ComboBoxTipo.getValue();
+        TipoBicicleta tipo = ComboBoxTipo.getValue();
         String color = txtColor.getText().trim();
         String numMarco = txtNumMarco.getText().trim();
         String modelo = txtModelo.getText().trim();
@@ -81,10 +76,16 @@ public class BicicletaController {
         }
         Bicicleta nuevaBici = new Bicicleta();
         nuevaBici.setMarca(marca);
-        nuevaBici.setTipo(TipoBicicleta.valueOf(tipo));
+        nuevaBici.setTipo(tipo);
         nuevaBici.setColor(color);
         nuevaBici.setSerial(numMarco);
-        nuevaBici.setAnio(Integer.parseInt(modelo));
+        
+        try {
+            nuevaBici.setAnio(Integer.parseInt(modelo));
+        } catch (NumberFormatException e) {
+            alerta(Alert.AlertType.ERROR, "Formato Incorrecto", "El modelo (año) debe ser un número válido.");
+            return;
+        }
         nuevaBici.setCliente(clienteAsignado);
 
         DataStore.bicicletas.add(nuevaBici);
@@ -116,13 +117,7 @@ public class BicicletaController {
         ComboBoxClienteAsignado.setValue(null);
     }
     private void llenarComboBoxTipo() {
-        // Obtener todos los valores del Enum y convertirlos a String
-        ObservableList<String> tipos = FXCollections.observableArrayList();
-
-        for (TipoBicicleta tipo : TipoBicicleta.values()) {
-            tipos.add(tipo.toString());
-        }
-        ComboBoxTipo.setItems(tipos);
+        ComboBoxTipo.setItems(FXCollections.observableArrayList(TipoBicicleta.values()));
     }
 
     private void llenarComboBoxClientes() {
@@ -149,7 +144,7 @@ public class BicicletaController {
     @FXML
     private void volverAlMenu() {
         try {
-            FXMLLoader loader = new FXMLLoader(TallerBicicletasApp.class.getResource("ui/MainView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/bicicletas/ui/MainView.fxml"));
             Scene scene = new Scene(loader.load(), 600, 400);
 
             Stage stage = (Stage) txtMarca.getScene().getWindow();

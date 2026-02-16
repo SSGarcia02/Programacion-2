@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.bicicletas.ui.OrdenServicioController"
+            prefWidth="750" prefHeight="600">
+
+    <top>
+        <HBox spacing="10">
+            <padding>
+                <Insets top="15" right="15" bottom="15" left="15"/>
+            </padding>
+            <Label text="Nueva Orden de Servicio" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="Volver" onAction="#volverAlMenu"/>
+        </HBox>
+    </top>
+
+    <center>
+        <VBox spacing="12">
+            <padding>
+                <Insets top="15" right="15" bottom="15" left="15"/>
+            </padding>
+
+            <GridPane hgap="10" vgap="10">
+                <Label text="Fecha:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <DatePicker fx:id="dpFecha" GridPane.rowIndex="0" GridPane.columnIndex="1" prefWidth="200"/>
+
+                <Label text="Hora (HH:MM):" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <TextField fx:id="txtHora" GridPane.rowIndex="1" GridPane.columnIndex="1" promptText="14:30"/>
+
+                <Label text="Bicicleta:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                <ComboBox fx:id="cbBicicleta" GridPane.rowIndex="2" GridPane.columnIndex="1" prefWidth="400"/>
+
+                <Label text="Mecánico:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                <ComboBox fx:id="cbMecanico" GridPane.rowIndex="3" GridPane.columnIndex="1" prefWidth="400"/>
+
+                <Label text="Motivo:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                <TextArea fx:id="txtMotivo" GridPane.rowIndex="4" GridPane.columnIndex="1"
+                          prefRowCount="2" prefWidth="400"/>
+
+                <Label text="Diagnóstico:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                <TextArea fx:id="txtDiagnostico" GridPane.rowIndex="5" GridPane.columnIndex="1"
+                          prefRowCount="2" prefWidth="400"/>
+
+                <Label text="Trabajo realizado:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+                <TextArea fx:id="txtTrabajo" GridPane.rowIndex="6" GridPane.columnIndex="1"
+                          prefRowCount="2" prefWidth="400"/>
+
+                <Label text="Costo ($):" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+                <TextField fx:id="txtCosto" GridPane.rowIndex="7" GridPane.columnIndex="1" promptText="0.00"/>
+            </GridPane>
+
+            <HBox spacing="10">
+                <Button text="Guardar" onAction="#guardarOrden"/>
+                <Button text="Limpiar" onAction="#limpiarFormulario"/>
+            </HBox>
+
+            <Separator/>
+
+            <Label text="Órdenes registradas" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+
+            <TableView fx:id="tblOrdenes" prefHeight="200">
+                <columns>
+                    <TableColumn fx:id="colFecha" text="Fecha" prefWidth="90"/>
+                    <TableColumn fx:id="colHora" text="Hora" prefWidth="70"/>
+                    <TableColumn fx:id="colBicicleta" text="Bicicleta" prefWidth="150"/>
+                    <TableColumn fx:id="colCliente" text="Cliente" prefWidth="130"/>
+                    <TableColumn fx:id="colMecanico" text="Mecánico" prefWidth="130"/>
+                    <TableColumn fx:id="colCosto" text="Costo" prefWidth="80"/>
+                </columns>
+            </TableView>
+
+        </VBox>
+    </center>
+
+</BorderPane>
