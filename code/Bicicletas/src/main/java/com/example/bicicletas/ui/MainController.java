@@ -43,13 +43,33 @@ public class MainController {
     }
 
     @FXML
-    private void registrarMecanico() {
-        mostrar("Pantalla Registrar Mecánico (pendiente)");
-    }
+    private void registrarMecanico(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(TallerBicicletasApp.class.getResource("ui/MecanicoView.fxml"));
+            Scene scene = new Scene(loader.load(), 720, 450);
 
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.setTitle("Registrar Mecánico");
+
+        } catch (Exception e) {
+            mostrar("Error abriendo MecanicoView: " + e.getMessage());
+        }
+    }
     @FXML
-    private void nuevaOrden() {
-        mostrar("Pantalla Nueva Orden (pendiente)");
+    private void nuevaOrden(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(TallerBicicletasApp.class.getResource("ui/OrdenServicioView.fxml"));
+            Scene scene = new Scene(loader.load(), 1000, 750);
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.setTitle("Nueva Orden de Servicio - Taller de Bicicletas");
+
+        } catch (Exception e) {
+            mostrar("Error abriendo OrdenServicioView: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     @FXML

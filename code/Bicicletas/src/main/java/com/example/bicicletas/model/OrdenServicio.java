@@ -28,4 +28,10 @@ public class OrdenServicio {
 
     public Bicicleta getBicicleta() { return bicicleta; }
     public LocalDate getFecha() { return fecha; }
+    public LocalTime getHora() { return hora; }
+    public Mecanico getMecanico() { return mecanico; }
+    public String getMotivo() { return motivo; }
+    public String getDiagnostico() { return diagnostico; }
+    public String getTrabajo() { return trabajo; }
+    public double getCosto() { return costo; }
 }

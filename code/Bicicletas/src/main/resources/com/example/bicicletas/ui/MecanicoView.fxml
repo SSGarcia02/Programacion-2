@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.bicicletas.ui.MecanicoController"
+            prefWidth="720" prefHeight="450">
+
+    <top>
+        <HBox spacing="10">
+            <padding>
+                <Insets top="15" right="15" bottom="15" left="15"/>
+            </padding>
+
+            <Label text="Registrar Mecánico" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="Volver" onAction="#volverAlMenu"/>
+        </HBox>
+
+    </top>
+
+    <center>
+        <VBox spacing="12">
+            <padding>
+                <Insets top="15" right="15" bottom="15" left="15"/>
+            </padding>
+            <GridPane hgap="10" vgap="10">
+                <Label text="Nombre completo:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <TextField fx:id="txtNombre" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                <Label text="Especialidad:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <ComboBox fx:id="cbEspecialidad" GridPane.rowIndex="1" GridPane.columnIndex="1" prefWidth="200"/>
+
+                <Label text="Código:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                <TextField fx:id="txtCodigo" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+            </GridPane>
+
+            <HBox spacing="10">
+                <Button text="Guardar" onAction="#guardarMecanico"/>
+                <Button text="Limpiar" onAction="#limpiarFormulario"/>
+            </HBox>
+
+            <Separator/>
+
+            <Label text="Mecánicos registrados" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+
+            <TableView fx:id="tblMecanicos" prefHeight="240">
+                <columns>
+                    <TableColumn fx:id="colNombre" text="Nombre" prefWidth="280"/>
+                    <TableColumn fx:id="colEspecialidad" text="Especialidad" prefWidth="280"/>
+                    <TableColumn fx:id="colCodigo" text="Código" prefWidth="140"/>
+                </columns>
+            </TableView>
+
+        </VBox>
+    </center>
+
+</BorderPane>

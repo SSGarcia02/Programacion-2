@@ -12,5 +12,6 @@ public class Mecanico {
     }
 
     public String getNombre() { return nombre; }
+    public EspecialidadMecanico getEspecialidad() { return especialidad; }
+    public String getCodigo() { return codigo; }
 }
-
