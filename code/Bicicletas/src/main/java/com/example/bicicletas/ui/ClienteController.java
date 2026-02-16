@@ -1,6 +1,5 @@
 package com.example.bicicletas.ui;
 
-import com.example.bicicletas.TallerBicicletasApp;
 import com.example.bicicletas.model.Cliente;
 import com.example.bicicletas.repository.DataStore;
 import javafx.collections.FXCollections;
@@ -82,7 +81,7 @@ public class ClienteController {
     @FXML
     private void volverAlMenu() {
         try {
-            FXMLLoader loader = new FXMLLoader(TallerBicicletasApp.class.getResource("ui/MainView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/bicicletas/ui/MainView.fxml"));
             Scene scene = new Scene(loader.load(), 600, 400);
 
             Stage stage = (Stage) txtNombre.getScene().getWindow();

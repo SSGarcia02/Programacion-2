@@ -1,6 +1,5 @@
 package com.example.bicicletas.ui;
 
-import com.example.bicicletas.TallerBicicletasApp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,43 +8,24 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class MainController {
 
     @FXML
     private void registrarCliente(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(TallerBicicletasApp.class.getResource("ui/ClienteView.fxml"));
-            Scene scene = new Scene(loader.load(), 720, 450);
-
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(scene);
-            stage.setTitle("Registrar Cliente");
-
-        } catch (Exception e) {
-            mostrar("Error abriendo ClienteView: " + e.getMessage());
-        }
+        cambiarEscena(event, "/com/example/bicicletas/ui/ClienteView.fxml", "Registrar Cliente");
     }
-
 
     @FXML
     private void registrarBicicleta(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(TallerBicicletasApp.class.getResource("ui/BicicletaView.fxml"));
-            Scene scene = new Scene(loader.load(), 720, 450);
-
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(scene);
-            stage.setTitle("Registrar Cliente");
-
-        } catch (Exception e) {
-            mostrar("Error abriendo ClienteView: " + e.getMessage());
-        }
+        cambiarEscena(event, "/com/example/bicicletas/ui/BicicletaView.fxml", "Registrar Bicicleta");
     }
 
     @FXML
     private void registrarMecanico(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(TallerBicicletasApp.class.getResource("ui/MecanicoView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/bicicletas/ui/MecanicoView.fxml"));
             Scene scene = new Scene(loader.load(), 720, 450);
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -59,7 +39,7 @@ public class MainController {
     @FXML
     private void nuevaOrden(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(TallerBicicletasApp.class.getResource("ui/OrdenServicioView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/bicicletas/ui/OrdenServicioView.fxml"));
             Scene scene = new Scene(loader.load(), 1000, 750);
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -73,13 +53,32 @@ public class MainController {
     }
 
     @FXML
-    private void historial() {
-        mostrar("Historial por Bicicleta (pendiente)");
+    private void historial(ActionEvent event) {
+        cambiarEscena(event, "/com/example/bicicletas/ui/HistorialView.fxml", "Historial por Bicicleta");
     }
 
+        } catch (Exception e) {
+            mostrar("Error abriendo MecanicoView: " + e.getMessage());
+        }
+    }
     @FXML
-    private void ordenesPorFecha() {
-        mostrar("Órdenes por Fecha (pendiente)");
+    private void ordenesPorFecha(ActionEvent event) {
+        cambiarEscena(event, "/com/example/bicicletas/ui/OrdenesPorFechaView.fxml", "Órdenes por Fecha");
+    }
+
+    private void cambiarEscena(ActionEvent event, String fxmlPath, String titulo) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Scene scene = new Scene(loader.load(), 720, 450); // Usamos el mismo tamaño para todas
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.setTitle(titulo);
+
+        } catch (IOException e) {
+            mostrar("Error abriendo la vista: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     private void mostrar(String msg) {

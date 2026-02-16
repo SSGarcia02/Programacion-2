@@ -26,7 +26,6 @@ public class OrdenServicio {
         this.costo = costo;
     }
 
-    public Bicicleta getBicicleta() { return bicicleta; }
     public LocalDate getFecha() { return fecha; }
     public LocalTime getHora() { return hora; }
     public Mecanico getMecanico() { return mecanico; }
