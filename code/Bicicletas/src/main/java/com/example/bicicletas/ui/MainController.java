@@ -1,5 +1,6 @@
 package com.example.bicicletas.ui;
 
+import com.example.bicicletas.TallerBicicletasApp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,13 +15,31 @@ public class MainController {
 
     @FXML
     private void registrarCliente(ActionEvent event) {
-        cambiarEscena(event, "/com/example/bicicletas/ui/ClienteView.fxml", "Registrar Cliente");
-    }
+        try {
+            FXMLLoader loader = new FXMLLoader(TallerBicicletasApp.class.getResource("ui/ClienteView.fxml"));
+            Scene scene = new Scene(loader.load(), 720, 450);
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.setTitle("Registrar Cliente");
+
+        } catch (Exception e) {
+            mostrar("Error abriendo ClienteView: " + e.getMessage());
+        }    }
 
     @FXML
     private void registrarBicicleta(ActionEvent event) {
-        cambiarEscena(event, "/com/example/bicicletas/ui/BicicletaView.fxml", "Registrar Bicicleta");
-    }
+        try {
+            FXMLLoader loader = new FXMLLoader(TallerBicicletasApp.class.getResource("ui/BicicletaView.fxml"));
+            Scene scene = new Scene(loader.load(), 720, 450);
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.setTitle("Registrar Cliente");
+
+        } catch (Exception e) {
+            mostrar("Error abriendo ClienteView: " + e.getMessage());
+        }    }
 
     @FXML
     private void registrarMecanico(ActionEvent event) {
@@ -54,17 +73,32 @@ public class MainController {
 
     @FXML
     private void historial(ActionEvent event) {
-        cambiarEscena(event, "/com/example/bicicletas/ui/HistorialView.fxml", "Historial por Bicicleta");
-    }
+        try {
+            FXMLLoader loader = new FXMLLoader(TallerBicicletasApp.class.getResource("ui/HistorialView.fxml"));
+            Scene scene = new Scene(loader.load(), 720, 450);
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.setTitle("Registrar Cliente");
 
         } catch (Exception e) {
-            mostrar("Error abriendo MecanicoView: " + e.getMessage());
+            mostrar("Error abriendo ClienteView: " + e.getMessage());
         }
+       
     }
     @FXML
     private void ordenesPorFecha(ActionEvent event) {
-        cambiarEscena(event, "/com/example/bicicletas/ui/OrdenesPorFechaView.fxml", "Órdenes por Fecha");
-    }
+        try {
+            FXMLLoader loader = new FXMLLoader(TallerBicicletasApp.class.getResource("ui/OrdenesPorFechaView.fxml"));
+            Scene scene = new Scene(loader.load(), 720, 450);
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.setTitle("Registrar Cliente");
+
+        } catch (Exception e) {
+            mostrar("Error abriendo ClienteView: " + e.getMessage());
+        }    }
 
     private void cambiarEscena(ActionEvent event, String fxmlPath, String titulo) {
         try {
