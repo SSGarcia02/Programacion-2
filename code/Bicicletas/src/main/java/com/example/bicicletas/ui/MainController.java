@@ -35,7 +35,7 @@ public class MainController {
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
-            stage.setTitle("Registrar Cliente");
+            stage.setTitle("Registrar Bicicleta");
 
         } catch (Exception e) {
             mostrar("Error abriendo ClienteView: " + e.getMessage());
@@ -79,7 +79,7 @@ public class MainController {
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
-            stage.setTitle("Registrar Cliente");
+            stage.setTitle("Historial");
 
         } catch (Exception e) {
             mostrar("Error abriendo ClienteView: " + e.getMessage());
@@ -94,12 +94,26 @@ public class MainController {
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
+            stage.setTitle("Paint Job");
+
+        } catch (Exception e) {
+            mostrar("Error abriendo ClienteView: " + e.getMessage());
+        }
+    }
+    @FXML
+    private void paintJob(ActionEvent event){
+        try {
+            FXMLLoader loader = new FXMLLoader(TallerBicicletasApp.class.getResource("ui/PaintJobView.fxml"));
+            Scene scene = new Scene(loader.load(), 720, 450);
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
             stage.setTitle("Registrar Cliente");
 
         } catch (Exception e) {
             mostrar("Error abriendo ClienteView: " + e.getMessage());
-        }    }
-
+        }
+    }
     private void cambiarEscena(ActionEvent event, String fxmlPath, String titulo) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));

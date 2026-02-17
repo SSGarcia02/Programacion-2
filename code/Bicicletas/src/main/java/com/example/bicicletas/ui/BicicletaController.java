@@ -64,7 +64,7 @@ public class BicicletaController {
         Cliente clienteAsignado = ComboBoxClienteAsignado.getValue();
 
         if (marca.isEmpty() || tipo == null || color.isEmpty() || numMarco.isEmpty()
-                || modelo.isEmpty() || clienteAsignado == null){
+                || modelo.isEmpty()){
             alerta(Alert.AlertType.WARNING, "Campos incompletos", "Por favor llena todos los campos.");
             return;
         }
